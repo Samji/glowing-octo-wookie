@@ -20,42 +20,64 @@ def checkinput(question, requiredAns):
         resp = raw_input()
     else:
         return resp.lower()
+
+def monthlyOutput(QOCsection):
+    '''A function to request a monetary amount that is spent in a month
+    :param: QOCsection: the subject in question
+    '''
+    if QOCsection == 'y':
+        resp = int(raw_input('How much do you pay every month? (£) '))
+        return resp
+
+def oneOff(QOCsection):
+    '''A function to request a monetary amount that was spent in one go
+    :param: QOCsection: the subject in question
+    '''
+    if QOCsection == 'y':
+        resp = int(int(raw_input(' How much did it cost? (£)' ))/12)
+        return resp
+
+def eitherOutput(QOCsection):
+    '''A function to request a monetary amount that is spent in a month or a year
+    :param: QOCsection: the subject in question
+    '''
+    if QOCsection == 'y':
+        resp = int(raw_input('How much do you pay every month? (£) '))
+    
+    else:
+        resp = int(int(raw_input('How much do you pay every year? (£) '))/12)
+        print "That should be around £",resp," a month"
         
+    return resp
 
 QOCpay = checkinput('\nAre you still paying for the purchase of your car? (Y/N)',ynValid)
-if QOCpay == 'y':
-    OCpay = int(raw_input('How much do you pay every month? (£) '))
+OCpay = monthlyOutput(QOCpay)
 
 OCpet = int(int(raw_input('\nHow much petrol does your current car use each week?: £ '))*4.333)
 
 QOCins = checkinput('\nDo you pay your insurance monthly? (Y/N)',ynValid)
-if QOCins == 'y':
-    OCins = int(raw_input('How much do you pay every month? (£) '))
-else:
-    OCins = int(int(raw_input('How much do you pay every year? (£) '))/12)
-print "That should be around £",OCins," a month"
+OCins = eitherOutput(QOCins)
+
 
 QOCtax = checkinput('\nDo you pay tax? (Y/N)',ynValid)
 if QOCtax == 'y':
-    OCtax = int(int(raw_input('How much do you pay in a year? (£) '))/12)
-    print "That should be around £",OCtax," a month"
+    OCtax = eitherOutput(QOCtax)
 
 print "\nDuring the last year"
 QOCser = checkinput(' 1. Has your car been in for a service? (Y/N)',ynValid)
-if QOCser == 'y':
-    OCser = int(int(raw_input(' How much did it cost? (£)' ))/12)
-    print " That should be around £",OCser," a month"
+OCser = oneOff(QOCser)
+print OCser
 
-QOCmot = checkinput('\n 2. Has your car been in for an MOT? (Y/N)',ynValid)
-if QOCmot == 'y':
-    OCmot = int(int(raw_input(	' How much did it cost? (£)' ))/12)
-    print " That should be around £",OCmot," a month"
-
-QOCrep = checkinput('\n 3. Has your car had any repair work? (Y/N)',ynValid)
-if QOCrep == 'y':
-    OCrep = int(int(raw_input(' How much did it/they cost? (£)' ))/12)
-    print " That should be around £",OCrep," a month"
-
-
-OCtot = OCpay + OCpet + OCins + OCtax + OCmot + OCser + OCrep
-print "\nAccording to my calculations you are currently paying £",OCtot," a month for your current car"
+##QOCmot = checkinput('\n 2. Has your car been in for an MOT? (Y/N)',ynValid)
+##if QOCmot == 'y':
+##    OCmot = int(int(raw_input(	' How much did it cost? (£)' ))/12)
+##    print " That should be around £",OCmot," a month"
+##
+##QOCrep = checkinput('\n 3. Has your car had any repair work? (Y/N)',ynValid)
+##if QOCrep == 'y':
+##    OCrep = int(int(raw_input(' How much did it/they cost? (£)' ))/12)
+##    print " That should be around £",OCrep," a month"
+##
+##
+##OCtot = OCpay + OCpet + OCins + OCtax + OCmot + OCser + OCrep
+##print "\nAccording to my calculations you are currently paying £",OCtot," a month for your current car"
